@@ -1,5 +1,5 @@
-var restify = require('restify')
-var botbuilder = require('botbuilder')
+let restify = require('restify')
+let botbuilder = require('botbuilder')
 
 // setup the restify server
 let server = restify.createServer()
@@ -18,18 +18,28 @@ server.post('/api/messages', connector.listen())
 
 // Reply by echoing
 let bot = new botbuilder.UniversalBot(connector, function (session) {
-    session.send('votre message %s ', session.message.text)
-    //session.send("you have tapped: ${session.message.text} | [length: ${session.message.text.length}]")
-    session.send(JSON.stringify(session.dialogData))
+    session.send('Reprends ça: %s ', session.message.text)
+    //session.send(JSON.stringify(session.dialogData))
+    let card = new botbuilder.AnimationCard(session)
+        .title('Card')
+        .subtitle('Well done')
+        .image(botbuilder.CardImage.create(session, 'https://media.giphy.com/media/xDQ3Oql1BN54c/giphy.gif'))
+        .media([
+            { url: 'https://media.giphy.com/media/xDQ3Oql1BN54c/giphy.gif' }
+        ]);
+    let msg = new botbuilder.Message(session).addAttachment(card);
+    session.send(msg);
+
     bot.on('typing', () => {
-        session.send('ca vient?');
+        session.send('Ca vient?');
     })
+
     bot.on('conversationUpdate', function (message) {
 
         if (message.membersAdded && message.membersAdded.length > 0) {
 
-            var membersAdded = message.membersAdded.map(function (x) {
-                var isSelf = x.id == message.address.bot.id;
+            let membersAdded = message.membersAdded.map(function (x) {
+                let isSelf = x.id == message.address.bot.id;
                 return (isSelf ? message.address.bot.name : x.name) || ' ' + '(Id=' + x.id + ' )'
             }).join(', ');
 

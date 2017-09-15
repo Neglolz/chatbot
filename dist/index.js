@@ -20,12 +20,16 @@ server.post('/api/messages', connector.listen());
 
 // Reply by echoing
 var bot = new botbuilder.UniversalBot(connector, function (session) {
-    session.send('votre message %s ', session.message.text);
-    //session.send("you have tapped: ${session.message.text} | [length: ${session.message.text.length}]")
-    session.send(JSON.stringify(session.dialogData));
+    session.send('Reprends ça: %s ', session.message.text);
+    //session.send(JSON.stringify(session.dialogData))
+    var card = new botbuilder.AnimationCard(session).title('Card').subtitle('Well done').image(botbuilder.CardImage.create(session, 'https://media.giphy.com/media/xDQ3Oql1BN54c/giphy.gif')).media([{ url: 'https://media.giphy.com/media/xDQ3Oql1BN54c/giphy.gif' }]);
+    var msg = new botbuilder.Message(session).addAttachment(card);
+    session.send(msg);
+
     bot.on('typing', function () {
-        session.send('ca vient?');
+        session.send('Ca vient?');
     });
+
     bot.on('conversationUpdate', function (message) {
 
         if (message.membersAdded && message.membersAdded.length > 0) {
