@@ -34,20 +34,24 @@ let bot = new botbuilder.UniversalBot(connector, function (session) {
         session.send('Ca vient?');
     })
 
-    bot.on('conversationUpdate', function (message) {
-
+    bot.on('conversationUpdate', message => {
         if (message.membersAdded && message.membersAdded.length > 0) {
-
             let membersAdded = message.membersAdded.map(function (x) {
                 let isSelf = x.id == message.address.bot.id;
                 return (isSelf ? message.address.bot.name : x.name) || ' ' + '(Id=' + x.id + ' )'
             }).join(', ');
-
-
             bot.send(new botbuilder.Message()
                 .address(message.address)
                 .text('Bienvenue ' + membersAdded));
         }
     });
 
+    bot.on('contactRelationUpdate', message => {
+        if (message.action && message.action === 'add') {
+            bot.send(new botbuilder.Message().address(message.address).text('Hello bot ' + message.address.id));
+        }
+        if (message.action && message.action === 'remove') {
+            bot.send(new botbuilder.Message().address(message.address).text('Bye bot ' + message.address.id));
+        }
+    });
 });
