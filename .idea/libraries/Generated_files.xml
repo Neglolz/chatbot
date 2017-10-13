@@ -3,13 +3,19 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/dist/greetings.js" />
+        <item url="file://$PROJECT_DIR$/dist/menu.js" />
         <item url="file://$PROJECT_DIR$/dist/hotel.js" />
+        <item url="file://$PROJECT_DIR$/dist/alarmDialog.js" />
+        <item url="file://$PROJECT_DIR$/dist/app.js" />
         <item url="file://$PROJECT_DIR$/dist/index.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/dist/greetings.js" />
+      <root url="file://$PROJECT_DIR$/dist/menu.js" />
       <root url="file://$PROJECT_DIR$/dist/hotel.js" />
+      <root url="file://$PROJECT_DIR$/dist/alarmDialog.js" />
+      <root url="file://$PROJECT_DIR$/dist/app.js" />
       <root url="file://$PROJECT_DIR$/dist/index.js" />
     </CLASSES>
     <SOURCES />

@@ -34,7 +34,6 @@ var job1 = new cron.CronJob({
 var bot = new botbuilder.UniversalBot(connector, function (session) {
 
     session.beginDialog('greetings:greetingsDialog');
-    session.beginDialog('example');
 });
 var username = '';
 var helpMessage = '\n * I\'m Simon, I repeat everything you say. \n * I announce when an user comes or leaves the conversation. \n * The feature works with bots too.';
@@ -63,21 +62,21 @@ function sendProactiveMessage(address) {
     bot.send(msg);
 }
 
-bot.dialog('example', function (session, args) {
+/*bot.dialog('example', (session, args) => {
 
     savedAddress = session.message.address;
 
-    var message = 'Hello! In a few seconds I\'ll send you a message proactively to demonstrate how bots can initiate messages.';
+    let message = 'Hello! In a few seconds I\'ll send you a message proactively to demonstrate how bots can initiate messages.';
     session.send(message);
 
     message = 'You can also make me send a message by accessing: ';
     message += 'http://localhost:' + server.address().port + '/api/CustomWebApi';
     session.send(message);
 
-    setTimeout(function () {
+    setTimeout(() => {
         sendProactiveMessage(savedAddress);
     }, 5000);
-});
+});*/
 
 // root dialog
 bot.dialog('example2', function (session, args) {
